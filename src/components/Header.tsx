@@ -8,15 +8,15 @@ export default async function Header() {
   const session = await getServerSession();
 
   return (
-    <nav className="bg-[#303a50] flex items-center justify-between">
+    <nav className="bg-gray-800 flex items-center justify-between h-[75px]">
       <div className="flex items-center">
         <Link
           href="/"
           className="rounded-full m-3 w-[50px] h-[50px] bg-[url('/logo.jpg')] bg-cover"
         ></Link>
-        <NavButtonLink href="/cart">Cart</NavButtonLink>
         <NavButtonLink href="/catalog">Catalog</NavButtonLink>
-        {session && <NavButtonLink href="/data">Data</NavButtonLink>}
+        <NavButtonLink href="/cart">Cart</NavButtonLink>
+        {session && <NavButtonLink href="/data">$Data</NavButtonLink>}
       </div>
       <div className="flex items-center justify-between">
         <SearchBar />

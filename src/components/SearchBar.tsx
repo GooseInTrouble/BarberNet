@@ -6,13 +6,13 @@ export default function SearchBar() {
         action="catalog"
       >
         <input
-          className="rounded-full pl-2 text-black"
+          className="rounded-full p-2 text-black mr-0.5"
           type="text"
           placeholder="Search..."
           name="search"
         />
         <button
-          className="bg-[#21ad9a] float-right w-10 h-10 rounded-full text-white"
+          className="bg-emerald-600 float-right aspect-square rounded-full text-white"
           type="submit"
         >
           Go

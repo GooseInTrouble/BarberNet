@@ -12,9 +12,7 @@ export default function ProfileButton() {
   const entryStyle = "block px-4 py-2 text-sm text-gray-700";
 
   const menuPanel = (
-    <div className="absolute right-5 z-10 mt-2 w-47 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
-      {/* <span className={entryStyle}>{session?.user?.name ?? "Guest"}</span>
-      <hr /> */}
+    <div className="absolute right-5 z-10 mt-2 w-47 origin-top-right rounded bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
       {session ? (
         <>
           <button className={entryStyle} onClick={() => signOut()}>

@@ -11,9 +11,9 @@ export default function NavButtonLink({
   return (
     <Link
       className="
-      text-gray-300 text-lg
-      rounded-md px-3 py-2
-      hover:bg-[#475c85] hover:text-white"
+      text-white text-lg
+      rounded-md px-3 py-2 mx-1
+      hover:bg-white hover:bg-opacity-10"
       href={href}
     >
       {children}
