@@ -1,4 +1,5 @@
-import ShopItem from "@/types/ShopItem";
+import Clothes from "@/types/Clothes";
+import Sets from "@/types/Sets"
 import CatalogUser from "@/types/CatalogUser";
 import { Collection, MongoClient } from "mongodb";
 
@@ -9,4 +10,5 @@ const client = new MongoClient(uri);
 export const db = client.db("stylehub");
 
 export const userCollection = db.collection("users") as Collection<CatalogUser>;
-export const shopItemCollection = db.collection("clothes") as Collection<ShopItem>;
+export const clothesCollection = db.collection("clothes") as Collection<Clothes>;
+export const setCollection = db.collection("Set") as Collection<Sets>

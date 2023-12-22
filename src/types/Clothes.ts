@@ -1,20 +1,17 @@
 import { ItemProps } from "./ItemProps";
 
 export type ItemCategory =
-  | "CPU"
-  | "GPU"
-  | "Motherboard"
-  | "RAM"
-  | "Hard Drive"
-  | "PSU";
+  | "Shirts"
+  | "Jeans"
+  | "Jackets"
+  | "Shoes"
 
-export default class ShopItem {
+export default class Clothes {
   constructor(
     public name: string,
-    public cost: number,
     public ItemCategory: ItemCategory,
+    public size: number,
     public props: ItemProps,
     public image: string = "/placeholder.jpg",
-    public quantity: number = 0
   ) {}
 }

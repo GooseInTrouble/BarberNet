@@ -3,13 +3,13 @@ import Link from "next/link";
 import { WithId } from "mongodb";
 
 import LikeButton from "./LikeButton";
-import ShopItem from "@/types/ShopItem";
+import Clothes from "@/types/Clothes";
 
 export default function CatalogItem({
   item,
   isLiked,
 }: {
-  item: WithId<ShopItem>;
+  item: WithId<Clothes>;
   isLiked: boolean | null;
 }) {
   return (
@@ -27,7 +27,7 @@ export default function CatalogItem({
         <p className="flex justify-center overflow-hidden">
           <span className="truncate">{item.name}</span>
         </p>
-        <p className="text-center">{`${Number(item.cost).toFixed(2)}₴`}</p>
+        <p className="text-center">{`${item.size}`}</p>
       </Link>
       <div className="flex gap-2 my-1">
         {isLiked !== null && <LikeButton id={item._id} isLiked={isLiked} />}

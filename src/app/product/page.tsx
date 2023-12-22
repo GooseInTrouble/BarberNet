@@ -1,5 +1,5 @@
 import LikeButton from "@/components/catalog/LikeButton";
-import { GetShopItem, GetUserLiked, PriceFormat } from "@/lib/Catalog";
+import { GetShopItem, GetUserLiked} from "@/lib/Catalog";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
@@ -61,10 +61,7 @@ export default async function Product({
             <p className="text-xl break-words">{shopItem.name}</p>
             <hr />
             <p className="pt-1">
-              Price:
-              <span className="underline pl-1">
-                {PriceFormat(shopItem.cost)}
-              </span>
+              Size:{shopItem.size}
             </p>
             <div className="flex gap-3 my-2">
               <LikeButton

@@ -15,7 +15,6 @@ export default async function Header() {
           className="rounded-full m-3 w-[50px] h-[50px] bg-[url('/logo.jpg')] bg-cover"
         ></Link>
         <NavButtonLink href="/catalog">Catalog</NavButtonLink>
-        <NavButtonLink href="/cart">Cart</NavButtonLink>
         {session && <NavButtonLink href="/data">$Data</NavButtonLink>}
       </div>
       <div className="flex items-center justify-between">

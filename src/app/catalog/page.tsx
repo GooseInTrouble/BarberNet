@@ -35,7 +35,7 @@ export default async function Catalog({
     catalog ??= await GetCatalogFiltered(searchParams);
   }
 
-  const filterNames = ["color", "seasons"];
+  const filterNames = ["color", "material"];
   const filterProps = await GetAllFilterProps(filterNames);
 
   return (
@@ -65,12 +65,8 @@ export default async function Catalog({
       </div>
       <div className="w-full">
         <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
-          <ItemCategoryButton productType="cpu">Clothes</ItemCategoryButton>
-          <ItemCategoryButton productType="gpu">GPUs</ItemCategoryButton>
-          <ItemCategoryButton productType="ram">RAM</ItemCategoryButton>
-          <ItemCategoryButton productType="hd">HardDrives</ItemCategoryButton>
-          <ItemCategoryButton productType="mb">Motherboards</ItemCategoryButton>
-          <ItemCategoryButton productType="psu">PSUs</ItemCategoryButton>
+          <ItemCategoryButton productType="Jeans">Jeans</ItemCategoryButton>
+          <ItemCategoryButton productType="Shirts">Shirts</ItemCategoryButton>
         </div>
         <div className="p-4 w-full grid grid-cols-4 gap-4">
           {catalog.map((item, index) => (

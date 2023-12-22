@@ -10,7 +10,7 @@ import {
   SearchParams,
   GetCatalogType,
 } from "@/lib/Catalog";
-import { ItemCategory } from "@/types/ShopItem";
+import { ItemCategory } from "@/types/Clothes";
 
 export default async function Catalog({
   searchParams,
@@ -31,63 +31,23 @@ export default async function Catalog({
     let productType: ItemCategory | undefined;
 
     switch (params.product) {
-      case "cpu":
-        productType = "CPU";
-        filterNames = [
-
-          "socket",
-          "threadCount",
-          "coreCount",
-          "clockspeed_GHz"
-        ];
+      case "Jeans":
+        productType = "Jeans";
       break;
-      case "gpu":
-        productType = "GPU";
-        filterNames = [
-        "pcieVersion", 
-        "gpuCableType", 
-        "memoryCapacity_Gb",
-        "memoryStandard"
-      ];
+      case "Shirts":
+        productType = "Shirts";
       break;
       case "ram":
-        productType = "RAM";
-        filterNames = [
-        "ramStandard", 
-        "frequency_GHz", 
-        "ramCapacity_Gb", 
-      ];
+        productType = "Jackets";
       break;
       case "hd":
-        productType = "Hard Drive";
-        filterNames = [
-        "memoryCapacity_Gb", 
-        "readSpeed_MBs", 
-        "writeSpeed_MBs", 
-        "type", 
-        "intrface"];
-      break;
-      case "mb":
-        productType = "Motherboard";
-        filterNames = [
-        "socket", 
-        "ramStandard", 
-        "pcieVersion", 
-        "ramSlotCount", 
-        "type"];
-      break;
-      case "psu":
-        productType = "PSU";
-        filterNames = [
-        "gpuCableType", 
-        "power_W", 
-        "efficiencyCertificate"];
+        productType = "Shoes";
       break;
       default:
       break;
     }
 
-    filterNames.push(...["color", "brand"]);
+    filterNames.push(...["color", "seasons"]);
     catalog = await GetCatalogType(productType!);
   } catch (err) {
     console.log(err);
@@ -125,12 +85,8 @@ export default async function Catalog({
       </div>
       <div className="w-full">
         <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
-          <ItemCategoryButton productType="cpu">CPUs</ItemCategoryButton>
-          <ItemCategoryButton productType="gpu">GPUs</ItemCategoryButton>
-          <ItemCategoryButton productType="ram">RAM</ItemCategoryButton>
-          <ItemCategoryButton productType="hd">HardDrives</ItemCategoryButton>
-          <ItemCategoryButton productType="mb">Motherboards</ItemCategoryButton>
-          <ItemCategoryButton productType="psu">PSUs</ItemCategoryButton>
+          <ItemCategoryButton productType="Jeans">Jeans</ItemCategoryButton>
+          <ItemCategoryButton productType="Shirts">Shirts</ItemCategoryButton>
         </div>
         <div className="p-4 w-full grid grid-cols-4 gap-4">
           {catalog.map((item, index) => (
