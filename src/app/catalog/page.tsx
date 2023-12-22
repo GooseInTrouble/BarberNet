@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { cookies } from "next/headers";
 
 import ItemCategoryButton from "@/components/catalog/ItemCategoryButtom";
 import CatalogItem from "@/components/catalog/CatalogItem";
@@ -36,11 +35,8 @@ export default async function Catalog({
     catalog ??= await GetCatalogFiltered(searchParams);
   }
 
-  const filterNames = ["color", "brand"];
+  const filterNames = ["color", "seasons"];
   const filterProps = await GetAllFilterProps(filterNames);
-
-  const basket = cookies().get("basket")?.value;
-  const basketArr: string[] = basket ? JSON.parse(basket) : [];
 
   return (
     <main className="flex bg-zinc-400">
@@ -69,7 +65,7 @@ export default async function Catalog({
       </div>
       <div className="w-full">
         <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
-          <ItemCategoryButton productType="cpu">CPUs</ItemCategoryButton>
+          <ItemCategoryButton productType="cpu">Clothes</ItemCategoryButton>
           <ItemCategoryButton productType="gpu">GPUs</ItemCategoryButton>
           <ItemCategoryButton productType="ram">RAM</ItemCategoryButton>
           <ItemCategoryButton productType="hd">HardDrives</ItemCategoryButton>
@@ -81,8 +77,7 @@ export default async function Catalog({
             <CatalogItem
               item={item}
               key={index}
-              isLiked={email ? likedStr.includes(item._id.toString()) : null}
-              isInBasket={basketArr.includes(item._id.toString())}
+              isLiked={email ? likedStr.includes(item._id.toString()) : null}              
             />
           ))}
         </div>

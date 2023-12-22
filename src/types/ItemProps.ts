@@ -2,13 +2,13 @@ export class ItemProps {
   public color?:
     | "None"
     | "Black"
-    | "White"
+    | "white"
     | "Grey"
     | "Green"
     | "Red"
     | "Blue"
     | "Yellow";
-  public brand?:
+  public category?:
     | "Intel"
     | "AMD"
     | "Asus"
@@ -20,6 +20,11 @@ export class ItemProps {
     | "Toshiba"
     | "G.Skill"
     | "Crucial";
+  public seasons?:
+    | "winter"
+    | "outumn"
+    | "summer"
+    | "spring";
 }
 
 export type Socket = "LGA 1151" | "LGA 1155" | "AM5" | "AM4";

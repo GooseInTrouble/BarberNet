@@ -138,7 +138,6 @@ export default async function Catalog({
               item={item}
               key={index}
               isLiked={email ? likedStr.includes(item._id.toString()) : null}
-              isInBasket={basketArr.includes(item._id.toString())}
             />
           ))}
         </div>

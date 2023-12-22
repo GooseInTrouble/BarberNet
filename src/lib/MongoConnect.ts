@@ -9,6 +9,4 @@ const client = new MongoClient(uri);
 export const db = client.db("stylehub");
 
 export const userCollection = db.collection("users") as Collection<CatalogUser>;
-export const shopItemCollection = db.collection(
-  "ShopItems"
-) as Collection<ShopItem>;
+export const shopItemCollection = db.collection("clothes") as Collection<ShopItem>;

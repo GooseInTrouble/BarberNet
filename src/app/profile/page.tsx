@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 
-const keys: (keyof CatalogUser)[] = ["name", "bio"];
+const keys: (keyof CatalogUser)[] = ["name"];
 
 export default async function Home() {
   const session = await getServerSession();

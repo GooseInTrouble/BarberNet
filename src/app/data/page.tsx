@@ -11,14 +11,9 @@ export default async function CRUD() {
   return (
     <main className="bg-slate-500">
       <DataTable
-        caption="shopItems"
+        caption="clothes"
         content={[
-          ["name", "text", "required"],
-          ["cost", "number", "required"],
-          ["ItemCategory", "text", "required"],
-          ["props", "object", "required"],
-          ["image"],
-          ["quantity", "number", "required"],
+          ["item", "string", "required"],
         ]}
         columnStyle="grid-cols-7"
       />

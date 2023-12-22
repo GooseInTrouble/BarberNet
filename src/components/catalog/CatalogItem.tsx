@@ -2,18 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { WithId } from "mongodb";
 
-import BasketButton from "./BasketButton";
 import LikeButton from "./LikeButton";
 import ShopItem from "@/types/ShopItem";
 
 export default function CatalogItem({
   item,
   isLiked,
-  isInBasket,
 }: {
   item: WithId<ShopItem>;
   isLiked: boolean | null;
-  isInBasket: boolean;
 }) {
   return (
     <div className="bg-slate-600 p-4 text-white text-lg hover:outline hover:bg-slate-500 rounded-md max-w-xs h-fit">
@@ -33,7 +30,6 @@ export default function CatalogItem({
         <p className="text-center">{`${Number(item.cost).toFixed(2)}₴`}</p>
       </Link>
       <div className="flex gap-2 my-1">
-        <BasketButton id={item._id} isInBasket={isInBasket} />
         {isLiked !== null && <LikeButton id={item._id} isLiked={isLiked} />}
       </div>
     </div>

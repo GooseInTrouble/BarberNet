@@ -1,4 +1,3 @@
-import BasketButton from "@/components/catalog/BasketButton";
 import LikeButton from "@/components/catalog/LikeButton";
 import { GetShopItem, GetUserLiked, PriceFormat } from "@/lib/Catalog";
 import { ObjectId } from "mongodb";
@@ -68,10 +67,6 @@ export default async function Product({
               </span>
             </p>
             <div className="flex gap-3 my-2">
-              <BasketButton
-                id={itemId}
-                isInBasket={basketArr.includes(itemId.toString())}
-              />
               <LikeButton
                 id={itemId}
                 isLiked={likedStr.includes(itemId.toString())}
