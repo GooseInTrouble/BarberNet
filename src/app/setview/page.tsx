@@ -1,11 +1,10 @@
-import LikeButton from "@/components/catalog/LikeButton";
-import { GetShopItem, GetUserLiked} from "@/lib/Catalog";
+import { GetShopItem, GetUserLiked} from "@/lib/Sets";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import Image from "next/image";
 
-export default async function Product({
+export default async function SetView({
   searchParams,
 }: {
   searchParams: { id: string };
@@ -24,8 +23,8 @@ export default async function Product({
   const clothes = await GetShopItem(itemId);
 
   let props = [];
-  for (const key in clothes.props) {
-    const val = (clothes.props as any)[key];
+  for (const key in clothes) {
+    const val = (clothes as any)[key];
     props.push(
       <tr key={key}>
         <td className="border border-slate-400 px-1.5 py-1">
@@ -54,20 +53,11 @@ export default async function Product({
           className=" object-contain min-w-[30%] w-full rounded-lg"
           width={900}
           height={900}
-        />
+        /> 
         <div className="text-lg text-white p-2 w-full h-full">
           <div>
             <p className="text-xl break-words">{clothes.name}</p>
             <hr />
-            <p className="pt-1">
-              Size:{clothes.size}
-            </p>
-            <div className="flex gap-3 my-2">
-              <LikeButton
-                id={itemId}
-                isLiked={likedStr.includes(itemId.toString())}
-              />
-            </div>
           </div>
           <div className="pt-5 max-h-[70%] overflow-auto w-full static">
             <p>Product characteristics:</p>

@@ -11,4 +11,4 @@ export const db = client.db("stylehub");
 
 export const userCollection = db.collection("users") as Collection<CatalogUser>;
 export const clothesCollection = db.collection("clothes") as Collection<Clothes>;
-export const setCollection = db.collection("Set") as Collection<Sets>
+export const setCollection = db.collection("sets") as Collection<Sets>

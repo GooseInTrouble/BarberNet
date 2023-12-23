@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 
-import ItemCategoryButton from "@/components/catalog/ItemCategoryButtom";
 import CatalogItem from "@/components/catalog/CatalogItem";
 import FilterGroup from "@/components/catalog/FilterGroup";
 import {
@@ -10,7 +9,7 @@ import {
   GetCatalogSearch,
   GetUserLiked,
   SearchParams,
-} from "@/lib/Catalog";
+} from "@/lib/Catalog"; 
 
 export default async function Catalog({
   searchParams,
@@ -64,10 +63,10 @@ export default async function Catalog({
         </div>
       </div>
       <div className="w-full">
-        <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
+        {/* <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
           <ItemCategoryButton productType="Jeans">Jeans</ItemCategoryButton>
           <ItemCategoryButton productType="Shirts">Shirts</ItemCategoryButton>
-        </div>
+        </div> */}
         <div className="p-4 w-full grid grid-cols-4 gap-4">
           {catalog.map((item, index) => (
             <CatalogItem

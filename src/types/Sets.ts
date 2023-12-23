@@ -1,7 +1,11 @@
-export default class ShopItem {
+export default class Sets {
 
-    constructor(
-        public name: string,
-        public image: string = "/placeholder.jpg",
-      ) {}
+  constructor(
+    public name: string,
+    public season: string[],
+    public purpose: string,
+    public color: string,
+    public image: string,
+    public clothingIds: number[]
+  ) {}
 }

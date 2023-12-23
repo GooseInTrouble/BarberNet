@@ -15,8 +15,10 @@ export default async function Header() {
           className="rounded-full m-3 w-[50px] h-[50px] bg-[url('/logo.jpg')] bg-cover"
         ></Link>
         <NavButtonLink href="/catalog">Catalog</NavButtonLink>
+        <NavButtonLink href="/sets">Sets</NavButtonLink>
         {session && <NavButtonLink href="/data">$Data</NavButtonLink>}
       </div>
+      <p className="text-white text-3xl font-serif font-bold">StyleHub</p>
       <div className="flex items-center justify-between">
         <SearchBar />
         <ProfileButton />

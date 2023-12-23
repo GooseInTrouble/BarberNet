@@ -1,10 +1,16 @@
-import { ItemProps } from "./ItemProps";
-
-export type ItemCategory =
-  | "Shirts"
-  | "Jeans"
-  | "Jackets"
-  | "Shoes"
+export class ItemProps {
+  public color?:
+    | "None"
+    | "Black"
+    | "White"
+    | "Grey"
+    | "Green"
+    | "Red"
+    | "Blue"
+    | "Yellow";
+  public material?: "Denim" | "Leather" | "Synthetic" | "Cotton" | "Canvas";
+}
+export type ItemCategory = "Shirts" | "Jeans" | "Jackets" | "Shoes";
 
 export default class Clothes {
   constructor(
@@ -12,6 +18,6 @@ export default class Clothes {
     public ItemCategory: ItemCategory,
     public size: number,
     public props: ItemProps,
-    public image: string = "/placeholder.jpg",
+    public image: string = "/placeholder.jpg"
   ) {}
 }

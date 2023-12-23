@@ -37,10 +37,10 @@ export default async function Catalog({
       case "Shirts":
         productType = "Shirts";
       break;
-      case "ram":
+      case "Jackets":
         productType = "Jackets";
       break;
-      case "hd":
+      case "Shoes":
         productType = "Shoes";
       break;
       default:

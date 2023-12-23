@@ -24,6 +24,12 @@ export default function ProfileButton() {
           <Link className={entryStyle} href="/catalog?liked">
             Favorites
           </Link>
+          <Link className={entryStyle} href="/newcloth">
+            Add Clothes
+          </Link>
+          <Link className={entryStyle} href="/newset">
+            Add Set
+          </Link>
         </>
       ) : (
         <>

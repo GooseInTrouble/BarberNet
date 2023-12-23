@@ -8,7 +8,7 @@ export default function Footer() {
         <NavButtonLink href="/about">About Us</NavButtonLink>
       </div>
       <hr />
-      <p></p>
+      <p className="text-gray text-md">©2023 StyleHub</p>
     </nav>
   );
 }
