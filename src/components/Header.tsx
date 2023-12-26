@@ -3,10 +3,11 @@ import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
 import NavButtonLink from "./NavButtonLink";
 import { getServerSession } from "next-auth";
+import { GrantAccses } from "@/components/IsAdmin";
 
 export default async function Header() {
   const session = await getServerSession();
-
+  
   return (
     <nav className="bg-gray-800 flex items-center justify-between h-[75px]">
       <div className="flex items-center">
@@ -16,8 +17,10 @@ export default async function Header() {
         ></Link>
         <NavButtonLink href="/catalog">Catalog</NavButtonLink>
         <NavButtonLink href="/sets">Sets</NavButtonLink>
-        {session && <NavButtonLink href="/data">$Data</NavButtonLink>}
+        <GrantAccses/>
+        
       </div>
+      
       <p className="text-white text-3xl font-serif font-bold">StyleHub</p>
       <div className="flex items-center justify-between">
         <SearchBar />

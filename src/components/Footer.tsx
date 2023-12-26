@@ -2,7 +2,7 @@ import NavButtonLink from "./NavButtonLink";
 
 export default function Footer() {
   return (
-    <nav className="bg-gray-700 font-arial p-2 items-center">
+    <nav className="bg-gray-700 font-arial p-2 items-center bottom-0">
       <div className="flex text-white items-start justify-start w-1/6">
         <NavButtonLink href="/">StyleHub</NavButtonLink>
         <NavButtonLink href="/about">About Us</NavButtonLink>
