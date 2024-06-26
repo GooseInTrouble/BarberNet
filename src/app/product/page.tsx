@@ -1,9 +1,8 @@
-import LikeButton from "@/components/catalog/LikeButton";
-import { GetShopItem, GetUserLiked} from "@/lib/Catalog";
+import { GetServiceItem} from "@/lib/Catalog";
 import { ObjectId } from "mongodb";
-import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Product({
   searchParams,
@@ -21,11 +20,11 @@ export default async function Product({
     return <p>Error. Item not found</p>;
   }
 
-  const clothes = await GetShopItem(itemId);
+  const salons = await GetServiceItem(itemId);
 
   let props = [];
-  for (const key in clothes.props) {
-    const val = (clothes.props as any)[key];
+  for (const key in salons) {
+    const val = (salons as any)[key];
     props.push(
       <tr key={key}>
         <td className="border border-slate-400 px-1.5 py-1">
@@ -36,12 +35,6 @@ export default async function Product({
     );
   }
 
-  const session = await getServerSession();
-  const email = session?.user?.email;
-
-  const liked = email ? await GetUserLiked(email) : [];
-  const likedStr = liked.map((x) => x.toString());
-
   const basket = cookies().get("basket")?.value;
   const basketArr: string[] = basket ? JSON.parse(basket) : [];
 
@@ -49,25 +42,16 @@ export default async function Product({
     <main className="bg-slate-500 text-white max-h-[30vh]">
       <div className="p-1 flex w-full h-[80vh]">
         <Image
-          src={clothes.image}
-          alt={`${clothes.name} image`}
+          src={salons.image}
+          alt={`${salons.name} image`}
           className=" object-contain min-w-[30%] w-full rounded-lg"
           width={900}
           height={900}
         />
         <div className="text-lg text-white p-2 w-full h-full">
           <div>
-            <p className="text-xl break-words">{clothes.name}</p>
+            <p className="text-xl break-words">{salons.name}</p>
             <hr />
-            <p className="pt-1">
-              Size:{clothes.size}
-            </p>
-            <div className="flex gap-3 my-2">
-              <LikeButton
-                id={itemId}
-                isLiked={likedStr.includes(itemId.toString())}
-              />
-            </div>
           </div>
           <div className="pt-5 max-h-[70%] overflow-auto w-full static">
             <p>Product characteristics:</p>
@@ -77,10 +61,15 @@ export default async function Product({
                   <th className="border border-slate-400 ">Characteristic</th>
                   <th className="border border-slate-400">Value</th>
                 </tr>
-                {props}
               </tbody>
             </table>
           </div>
+            <div className="
+            text-white text-lg
+            rounded-md px-3 py-2 mx-1
+            hover:bg-white hover:bg-opacity-10">
+              <Link href="/newAppointment"> Schedule Appointment </Link>
+            </div>
         </div>
       </div>
     </main>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
-              src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
+              src="/salon5.jpg"
               className="block w-full"
               alt="..."
             />
@@ -21,30 +22,42 @@ export default function Home() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 m-2 p-2">
-        <Image
-          src="/pic1.jpg"
-          alt="placeholderjpg"
-          className="max-h-[400px] block"
-          width={400}
-          height={400}
-          priority
-        />
-        <Image
-          src="/pic2.jpg"
-          alt="placeholderjpg"
-          className="max-h-[400px] block"
-          width={400}
-          height={400}
-          priority
-        />
-        <Image
-          src="/biker.jpg"
-          alt="placeholderjpg"
-          className="max-h-[400px] block"
-          width={400}
-          height={400}
-          priority
-        />
+        <Link href="/page2">
+          <a className="block group">
+            <Image
+              src="/salon1.jpg"
+              alt="placeholderjpg"
+              className="max-h-[400px] block group-hover:blur-sm transition duration-300"
+              width={400}
+              height={400}
+              priority
+            />
+          </a>
+        </Link>
+        <Link href="/page3">
+          <a className="block group">
+            <Image
+              src="/salon2.jpeg"
+              alt="placeholderjpg"
+              className="max-h-[400px] block group-hover:blur-sm transition duration-300"
+              width={400}
+              height={400}
+              priority
+            />
+          </a>
+        </Link>
+        <Link href="/page1">
+          <a className="block group">
+            <Image
+              src="/salon3.webp"
+              alt="placeholderjpg"
+              className="max-h-[400px] block group-hover:blur-sm transition duration-300"
+              width={400}
+              height={400}
+              priority
+            />
+          </a>
+        </Link>
       </div>
     </main>
   );

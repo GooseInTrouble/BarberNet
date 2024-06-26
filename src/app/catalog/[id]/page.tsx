@@ -1,62 +1,29 @@
-import { getServerSession } from "next-auth";
-import { cookies } from "next/headers";
 
-import ItemCategoryButton from "@/components/catalog/ItemCategoryButtom";
 import CatalogItem from "@/components/catalog/CatalogItem";
 import FilterGroup from "@/components/catalog/FilterGroup";
 import {
   GetAllFilterProps,
-  GetUserLiked,
+  GetCatalogFiltered,
+  GetCatalogSearch,
   SearchParams,
-  GetCatalogType,
-} from "@/lib/Catalog";
-import { ItemCategory } from "@/types/Clothes";
+} from "@/lib/Catalog"; 
 
 export default async function Catalog({
   searchParams,
-  params,
 }: {
   searchParams: SearchParams;
-  params: { product: string };
 }) {
-  const session = await getServerSession();
-  const email = session?.user?.email;
+  const searchParam = searchParams["search"];
 
-  const liked = email ? await GetUserLiked(email) : [];
-  const likedStr = liked.map((x) => x.toString());
-
-  let catalog: any[] = [];
-  let filterNames: string[] = [];
-  try {
-    let productType: ItemCategory | undefined;
-
-    switch (params.product) {
-      case "Jeans":
-        productType = "Jeans";
-      break;
-      case "Shirts":
-        productType = "Shirts";
-      break;
-      case "Jackets":
-        productType = "Jackets";
-      break;
-      case "Shoes":
-        productType = "Shoes";
-      break;
-      default:
-      break;
-    }
-
-    filterNames.push(...["color", "seasons"]);
-    catalog = await GetCatalogType(productType!);
-  } catch (err) {
-    console.log(err);
+  let catalog;
+  if (searchParam && !Array.isArray(searchParam)) {
+    catalog = await GetCatalogSearch(searchParam);
+  } else {
+    catalog ??= await GetCatalogFiltered(searchParams);
   }
 
+  const filterNames = ["color", "material"];
   const filterProps = await GetAllFilterProps(filterNames);
-
-  const basket = cookies().get("basket")?.value;
-  const basketArr: string[] = basket ? JSON.parse(basket) : [];
 
   return (
     <main className="flex bg-zinc-400">
@@ -84,16 +51,15 @@ export default async function Catalog({
         </div>
       </div>
       <div className="w-full">
-        <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
+        {/* <div className="bg-slate-600 h-[40px] w-full sticky top-0 grid grid-cols-6">
           <ItemCategoryButton productType="Jeans">Jeans</ItemCategoryButton>
           <ItemCategoryButton productType="Shirts">Shirts</ItemCategoryButton>
-        </div>
+        </div> */}
         <div className="p-4 w-full grid grid-cols-4 gap-4">
           {catalog.map((item, index) => (
             <CatalogItem
               item={item}
-              key={index}
-              isLiked={email ? likedStr.includes(item._id.toString()) : null}
+              key={index}             
             />
           ))}
         </div>

@@ -1,10 +1,11 @@
 import DataTable from "@/components/DataTable";
 import { getServerSession } from "next-auth";
-import { isUserAdmin } from "@/components/IsAdmin";
+import { isUserEmployee } from "@/components/isEmployee";
 
 export default async function CRUD() {
   const session = await getServerSession();
 
+  //Access check
   if (!session || !session.user) {
     return (
       <main className="border-slate-800 flex h-screen flex-col items-center justify-center p-24 bg-slate-500 bg-fixed text-black text-white text-3xl">
@@ -19,9 +20,9 @@ export default async function CRUD() {
     return <p>Invalid user email</p>;
   }
 
-  const isAdmin = await isUserAdmin(userEmail);
+  const isEmployee = await isUserEmployee(userEmail);
 
-  if (!isAdmin) {
+  if (!isEmployee) {
     return (
       <main className="border-slate-800 flex h-screen flex-col items-center justify-center p-24 bg-slate-500 bg-fixed text-black text-white text-3xl">
         Access not granted
@@ -31,28 +32,54 @@ export default async function CRUD() {
 
   return (
     <main className="bg-slate-500 text-white">
-      <p>Clothes</p>
+      <p>Appointments</p>
       <DataTable
-        caption="clothes"
+        caption="appointments"
         content={[
-          ["name", "text", "required"],
-          ["category", "text", "required"],
-          ["seasons", "array", "required"],
-          ["props", "object", "required"],
-          ["size", "text", "required"],
-          ["image"],
+          ["_id", "text","readonly"],
+          ["date", "text", "required"],
+          ["serviceId", "text", "required"],
+          ["workerId", "text", "required"],
+          ["userId", "text", "required"],
+          ["totalCost", "boolean", "required"],
         ]}
         columnStyle="grid-cols-7"
       />
-      <p>Sets</p>
+      <p>Salons</p>
       <DataTable
-        caption="sets"
+        caption="salons"
         content={[
+          ["_id", "text","readonly"],
           ["name", "text", "required"],
-          ["season", "object", "required"],
-          ["purpose", "text", "required"],
-          ["color", "text", "required"],
+          ["location", "text", "required"],
           ["image"],
+          ["workers", "object", "required"],
+          ["services", "object", "required"],
+          ["tools", "object", "required"],
+          ["description", "text", "required"],
+        ]}
+        columnStyle="grid-cols-9"
+      />
+      <p>Services</p>
+      <DataTable
+        caption="services"
+        content={[
+          ["_id", "text","readonly"],
+          ["name", "text", "required"],
+          ["price", "text", "required"],
+          ["description", "text", "required"],
+          ["image"],
+          ["ServiceCategory", "object", "required"],
+        ]}
+        columnStyle="grid-cols-7"
+      />
+      <p>Tools</p>
+      <DataTable
+        caption="tools"
+        content={[
+          ["_id", "text","readonly"],
+          ["name", "text", "required"],
+          ["type", "text", "required"],
         ]}
         columnStyle="grid-cols-7"
       />
@@ -60,13 +87,28 @@ export default async function CRUD() {
       <DataTable
         caption="users"
         content={[
+          ["_id", "text","readonly"],
           ["name", "text", "required"],
           ["email", "text", "required"],
-          ["liked", "array", "required"],
-          ["isAdmin", "boolean", "required"],
+          ["isEmployee", "boolean", "required"],          
+          ["salonId", "text"],
+        ]}
+        columnStyle="grid-cols-7"
+      />
+      <p>Workers</p>
+      <DataTable
+        caption="workers"
+        content={[
+          ["_id", "text","readonly"],
+          ["name", "text", "required"],
+          ["email", "text", "required"],          
+          ["salonId", "text"],
         ]}
         columnStyle="grid-cols-7"
       />
     </main>
   );
 }
+/* "name": "John Doe",
+  "email": "johndoe@example.com",
+  "salonId":*/

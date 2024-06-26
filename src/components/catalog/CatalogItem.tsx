@@ -1,16 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WithId } from "mongodb";
-
-import LikeButton from "./LikeButton";
-import Clothes from "@/types/Clothes";
+import Services from "@/types/Services";
 
 export default function CatalogItem({
   item,
-  isLiked,
 }: {
-  item: WithId<Clothes>;
-  isLiked: boolean | null;
+  item: WithId<Services>;
 }) {
   return (
     <div className="bg-slate-600 p-4 text-white text-lg hover:outline hover:bg-slate-500 rounded-md max-w-xs h-fit">
@@ -27,11 +23,7 @@ export default function CatalogItem({
         <p className="flex justify-center overflow-hidden">
           <span className="truncate">{item.name}</span>
         </p>
-        <p className="text-center">{`${item.size}`}</p>
       </Link>
-      <div className="flex gap-2 my-1">
-        {isLiked !== null && <LikeButton id={item._id} isLiked={isLiked} />}
-      </div>
     </div>
   );
 }

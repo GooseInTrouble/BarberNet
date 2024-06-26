@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { WithId } from "mongodb";
 
-import Sets from "@/types/Sets";
+import Salons from "@/types/Salons";
 
 export default function CatalogItem({
   item,
 }: {
-  item: WithId<Sets>;
+  item: WithId<Salons>;
 }) {
   return (
     <div className="bg-slate-600 p-4 text-white text-lg hover:outline hover:bg-slate-500 rounded-md max-w-xs h-fit">

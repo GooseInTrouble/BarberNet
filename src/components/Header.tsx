@@ -3,7 +3,7 @@ import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
 import NavButtonLink from "./NavButtonLink";
 import { getServerSession } from "next-auth";
-import { GrantAccses } from "@/components/IsAdmin";
+import { GrantAccess } from "@/components/isEmployee";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -15,13 +15,11 @@ export default async function Header() {
           href="/"
           className="rounded-full m-3 w-[50px] h-[50px] bg-[url('/logo.jpg')] bg-cover"
         ></Link>
-        <NavButtonLink href="/catalog">Catalog</NavButtonLink>
-        <NavButtonLink href="/sets">Sets</NavButtonLink>
-        <GrantAccses/>
-        
+        <NavButtonLink href="/salons">Salons</NavButtonLink>
+        <GrantAccess/>       
       </div>
       
-      <p className="text-white text-3xl font-serif font-bold">StyleHub</p>
+      <p className="text-white text-3xl font-serif font-bold">BarberNet</p>
       <div className="flex items-center justify-between">
         <SearchBar />
         <ProfileButton />

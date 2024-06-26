@@ -1,5 +1,5 @@
 import { userCollection } from "@/lib/MongoConnect";
-import CatalogUser from "@/types/CatalogUser";
+import Users from "@/types/Users";
 import { User } from "next-auth";
 
 export default async function dbRegister(user: User) {
@@ -15,8 +15,12 @@ export default async function dbRegister(user: User) {
     return;
   }
 
-  const newUser = new CatalogUser(user.email);
+  
+  const newUser = new Users(user.email);
   if (user.name) newUser.name = user.name;
+  newUser.isEmployee = false;
+  newUser.salonId = "";
+
 
   userCollection.insertOne(newUser);
 

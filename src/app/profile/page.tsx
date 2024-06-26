@@ -1,5 +1,5 @@
 import { userCollection } from "@/lib/MongoConnect";
-import CatalogUser from "@/types/CatalogUser";
+import CatalogUser from "@/types/Users";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";

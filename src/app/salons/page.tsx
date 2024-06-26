@@ -1,46 +1,33 @@
 import { getServerSession } from "next-auth";
-import SetItem from "@/components/sets/SetItem";
+import SalonItem from "@/components/salons/SalonItem";
 import {
-  GetAllFilterProps,
   GetCatalogFiltered,
-  GetCatalogById,
   GetCatalogSearch,
-  GetUserLiked,
   SearchParams,
-} from "@/lib/Sets"; 
+} from "@/lib/Salons"; 
 
-export default async function Catalog({
+export default async function Salon({
   searchParams,
 }: {
   searchParams: SearchParams;
 }) {
   const session = await getServerSession();
-  const email = session?.user?.email;
-
-  const liked = email ? await GetUserLiked(email) : [];
-
-  const likedParam = searchParams["liked"];
   const searchParam = searchParams["search"];
 
   let catalog;
-  if (likedParam === "") {
-    catalog = await GetCatalogById(liked);
-  } else if (searchParam && !Array.isArray(searchParam)) {
+  if (searchParam && !Array.isArray(searchParam)) {
     catalog = await GetCatalogSearch(searchParam);
   } else {
     catalog ??= await GetCatalogFiltered(searchParams);
   }
 
-  const filterNames = ["color", "material"];
-  const filterProps = await GetAllFilterProps(filterNames);
-
   return (
     <main className="flex bg-zinc-400">
       <div className="w-full">
-      <div className="bg-slate-600 h-[40px] w-full sticky top-0 text-center text-white text-lg py-2"> Sets</div>
+      <div className="bg-slate-600 h-[40px] w-full sticky top-0 text-center text-white text-lg py-2"> Salons</div>
         <div className="p-4 w-full grid grid-cols-4 gap-4">
           {catalog.map((item, index) => (
-            <SetItem
+            <SalonItem
               item={item}
               key={index}            
             />

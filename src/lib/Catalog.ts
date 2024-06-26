@@ -1,10 +1,10 @@
-import Clothes, { ItemCategory } from "@/types/Clothes";
+import Services, { ServiceCategory } from "@/types/Services";
 
-import { clothesCollection, userCollection } from "@/lib/MongoConnect";
+import { servicesCollection, userCollection } from "@/lib/MongoConnect";
 import { WithId, Filter, Document, ObjectId } from "mongodb";
 
 export function GetFilterProps(filterName: string) {
-  return clothesCollection.distinct(`props.${filterName}`);
+  return servicesCollection.distinct(`props.${filterName}`);
 }
 
 export function GetAllFilterProps(filterNames: string[]) {
@@ -12,9 +12,14 @@ export function GetAllFilterProps(filterNames: string[]) {
     filterNames.map((filterName) => GetFilterProps(filterName))
   );
 }
+// src/lib/MongoConnect.ts
 
-export function GetCatalogFull(): Promise<WithId<Clothes>[]> {
-  return clothesCollection.find().toArray() as Promise<WithId<Clothes>[]>;
+export function GetServicesBySalonId(salonId: ObjectId) {
+  return servicesCollection.find({ salonId: salonId }).toArray() as Promise<WithId<Services>[]>;
+}
+
+export function GetCatalogFull(): Promise<WithId<Services>[]> {
+  return servicesCollection.find().toArray() as Promise<WithId<Services>[]>;
 }
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
@@ -22,9 +27,9 @@ export type SearchParams = { [key: string]: string | string[] | undefined };
 export function GetCatalogFiltered(searchParams: SearchParams) {
   const mongoFilter = ToMongoFilter(searchParams);
 
-  const query = clothesCollection.find(mongoFilter);
+  const query = servicesCollection.find(mongoFilter);
 
-  return query.toArray() as Promise<WithId<Clothes>[]>;
+  return query.toArray() as Promise<WithId<Services>[]>;
 }
 
 function ToMongoFilter(searchParams: SearchParams) {
@@ -44,7 +49,7 @@ function ToMongoFilter(searchParams: SearchParams) {
 }
 
 export function GetCatalogSearch(searchQuery: string) {
-  const query = clothesCollection.aggregate([
+  const query = servicesCollection.aggregate([
     {
       $search: {
         index: "searchIndex",
@@ -58,28 +63,26 @@ export function GetCatalogSearch(searchQuery: string) {
     },
   ]);
 
-  return query.toArray() as Promise<WithId<Clothes>[]>;
+  return query.toArray() as Promise<WithId<Services>[]>;
 }
 
-export async function GetUserLiked(email: string): Promise<ObjectId[]> {
-  const user = await userCollection.findOne({
-    email: email,
-  });
-
-  return user?.liked ?? [];
-}
-
-export function GetCatalogById(liked: ObjectId[]) {
-  return clothesCollection.find({ _id: { $in: liked } }).toArray() as Promise<
-    WithId<Clothes>[]
+export function GetServiceById(liked: ObjectId[]) {
+  return servicesCollection.find({ _id: { $in: liked } }).toArray() as Promise<
+    WithId<Services>[]
   >;
 }
 
-export function GetCatalogType(type: ItemCategory) {
-  return clothesCollection.find({ ItemCategory: type }).toArray();
+
+
+
+/*-------------------------------------------------
+Service  Services  servicesCollection
+*/
+
+export function GetServiceItem(id: ObjectId) {
+  return servicesCollection.findOne({ _id: id }) as Promise<WithId<Services>>;
 }
 
-export function GetShopItem(id: ObjectId) {
-  return clothesCollection.findOne({ _id: id }) as Promise<WithId<Clothes>>;
+export function GetServiceType(type: ServiceCategory) {
+  return servicesCollection.find({ ItemCategory: type }).toArray();
 }
-
