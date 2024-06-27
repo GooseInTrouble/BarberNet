@@ -1,3 +1,5 @@
+// components/Header.tsx
+
 import Link from "next/link";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
@@ -7,7 +9,8 @@ import { GrantAccess } from "@/components/isEmployee";
 
 export default async function Header() {
   const session = await getServerSession();
-  
+  const grantAccess = await GrantAccess();
+
   return (
     <nav className="bg-gray-800 flex items-center justify-between h-[75px]">
       <div className="flex items-center">
@@ -16,7 +19,8 @@ export default async function Header() {
           className="rounded-full m-3 w-[50px] h-[50px] bg-[url('/logo.jpg')] bg-cover"
         ></Link>
         <NavButtonLink href="/salons">Salons</NavButtonLink>
-        <GrantAccess/>       
+        <NavButtonLink href="/newAppointment">Appointments</NavButtonLink>
+        {grantAccess && <NavButtonLink href="/data">$Data</NavButtonLink>}
       </div>
       
       <p className="text-white text-3xl font-serif font-bold">BarberNet</p>

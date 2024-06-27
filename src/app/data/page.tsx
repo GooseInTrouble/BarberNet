@@ -69,7 +69,7 @@ export default async function CRUD() {
           ["price", "text", "required"],
           ["description", "text", "required"],
           ["image"],
-          ["ServiceCategory", "object", "required"],
+          ["ServiceCategory", "text", "required"],
         ]}
         columnStyle="grid-cols-7"
       />

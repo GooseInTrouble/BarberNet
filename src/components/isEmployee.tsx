@@ -1,16 +1,21 @@
+// components/isEmployee.tsx
+
 import { userCollection } from "@/lib/MongoConnect";
 import { getServerSession } from "next-auth";
 import NavButtonLink from "@/components/NavButtonLink";
 
 export async function isUserEmployee(email: string): Promise<boolean> {
   const user = await userCollection.findOne({ email: email });
-  ;
-  //Перевірка, чи є користувач працівником салону
+  return user?.isEmployee || false;
+}
+
+export async function isUserAdmin(email: string): Promise<boolean> {
+  const user = await userCollection.findOne({ email: email });
   return user?.isEmployee || false;
 }
 
 export async function GrantAccess() {
-  const session = await getServerSession()
+  const session = await getServerSession();
   if (!session || !session.user) {
     return false;
   }
@@ -21,13 +26,19 @@ export async function GrantAccess() {
   }
 
   const isEmployee = await isUserEmployee(userEmail);
+  const isAdmin = await isUserAdmin(userEmail);
 
-  if (!isEmployee) {
-    return false;
+  if (isEmployee || isAdmin) {
+    return true;
   }
-  else if(userEmail == "artem.arabadzhy@nure.ua"){
-    return (<>{session && <NavButtonLink href="/data">$Data</NavButtonLink>}</>);
-  }
+
+  return false;
 }
 
+export default class Users {
+  constructor(public email: string) {}
 
+  public name?: string;
+  public isEmployee?: boolean;
+  public salonId?: string;
+}

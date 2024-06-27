@@ -1,30 +1,18 @@
+import { servicesCollection } from "@/lib/MongoConnect";
+import { WithId, Filter, Document } from "mongodb";
 import Services, { ServiceCategory } from "@/types/Services";
 
-import { servicesCollection, userCollection } from "@/lib/MongoConnect";
-import { WithId, Filter, Document, ObjectId } from "mongodb";
-
-export function GetFilterProps(filterName: string) {
-  return servicesCollection.distinct(`props.${filterName}`);
+export function GetFilterProps(filterName: keyof Services) {
+  return servicesCollection.distinct(filterName);
 }
 
-export function GetAllFilterProps(filterNames: string[]) {
+export function GetAllFilterProps(filterNames: (keyof Services)[]) {
   return Promise.all(
     filterNames.map((filterName) => GetFilterProps(filterName))
   );
 }
-// src/lib/MongoConnect.ts
 
-export function GetServicesBySalonId(salonId: ObjectId) {
-  return servicesCollection.find({ salonId: salonId }).toArray() as Promise<WithId<Services>[]>;
-}
-
-export function GetCatalogFull(): Promise<WithId<Services>[]> {
-  return servicesCollection.find().toArray() as Promise<WithId<Services>[]>;
-}
-
-export type SearchParams = { [key: string]: string | string[] | undefined };
-
-export function GetCatalogFiltered(searchParams: SearchParams) {
+export function GetCatalogFiltered(searchParams: Partial<Services>) {
   const mongoFilter = ToMongoFilter(searchParams);
 
   const query = servicesCollection.find(mongoFilter);
@@ -32,16 +20,16 @@ export function GetCatalogFiltered(searchParams: SearchParams) {
   return query.toArray() as Promise<WithId<Services>[]>;
 }
 
-function ToMongoFilter(searchParams: SearchParams) {
+function ToMongoFilter(searchParams: Partial<Services>) {
   const mongoFilter: Filter<Document> = {};
 
   for (const key in searchParams) {
-    const val = searchParams[key];
+    const val = searchParams[key as keyof Services];
 
     if (Array.isArray(val)) {
-      mongoFilter[`props.${key}`] = { $in: val };
+      mongoFilter[key] = { $in: val };
     } else {
-      mongoFilter[`props.${key}`] = val;
+      mongoFilter[key] = val;
     }
   }
 
@@ -64,25 +52,4 @@ export function GetCatalogSearch(searchQuery: string) {
   ]);
 
   return query.toArray() as Promise<WithId<Services>[]>;
-}
-
-export function GetServiceById(liked: ObjectId[]) {
-  return servicesCollection.find({ _id: { $in: liked } }).toArray() as Promise<
-    WithId<Services>[]
-  >;
-}
-
-
-
-
-/*-------------------------------------------------
-Service  Services  servicesCollection
-*/
-
-export function GetServiceItem(id: ObjectId) {
-  return servicesCollection.findOne({ _id: id }) as Promise<WithId<Services>>;
-}
-
-export function GetServiceType(type: ServiceCategory) {
-  return servicesCollection.find({ ItemCategory: type }).toArray();
 }

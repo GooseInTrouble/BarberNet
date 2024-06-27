@@ -22,8 +22,8 @@ export default function Home() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 m-2 p-2">
-        <Link href="/page2">
-          <a className="block group">
+        <Link href="/setview?id=667833f26bd549ac28d2d203">
+          <div className="block group cursor-pointer">
             <Image
               src="/salon1.jpg"
               alt="placeholderjpg"
@@ -32,10 +32,10 @@ export default function Home() {
               height={400}
               priority
             />
-          </a>
+          </div>
         </Link>
-        <Link href="/page3">
-          <a className="block group">
+        <Link href="/setview?id=667af292b1585c48d2239aa4">
+          <div className="block group cursor-pointer">
             <Image
               src="/salon2.jpeg"
               alt="placeholderjpg"
@@ -44,10 +44,10 @@ export default function Home() {
               height={400}
               priority
             />
-          </a>
+          </div>
         </Link>
-        <Link href="/page1">
-          <a className="block group">
+        <Link href="/setview?id=667aec311cfe140e393e017a">
+          <div className="block group cursor-pointer">
             <Image
               src="/salon3.webp"
               alt="placeholderjpg"
@@ -56,7 +56,7 @@ export default function Home() {
               height={400}
               priority
             />
-          </a>
+          </div>
         </Link>
       </div>
     </main>
