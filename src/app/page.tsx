@@ -7,7 +7,7 @@ export default function Home() {
       <div id="carouselExampleCaptions" className="relative">
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <img
+            <Image
               src="/salon5.jpg"
               className="block w-full"
               alt="..."

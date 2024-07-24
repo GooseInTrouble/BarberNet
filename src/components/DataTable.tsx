@@ -162,7 +162,7 @@ export default function DataTable({
       >
         {content.map(([key, type, extra]) =>
           extra === "readonly" ? (
-            <div></div>
+            <div key={key}></div>
           ) : (
             <input
               className="border border-black p-2 bg-slate-500 text-white"
