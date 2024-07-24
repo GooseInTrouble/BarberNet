@@ -11,7 +11,6 @@ interface AppointmentData {
   price: number;
 }
 
-// Використовуємо dynamic для динамічного імпорту AppointmentForm для рендерингу на клієнті
 const AppointmentForm = dynamic(() => import('./AppointmentForm'), { ssr: false });
 
 const NewAppointmentPage = () => {
@@ -33,7 +32,7 @@ const NewAppointmentPage = () => {
   const [serviceId, setServiceId] = useState<string>('');
   const [workerId, setWorkerId] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
-  const [price, setPrice] = useState<number>(50); // Встановлюємо ціну за замовчуванням на 50
+  const [price, setPrice] = useState<number>(50);
 
   return (
     <main>

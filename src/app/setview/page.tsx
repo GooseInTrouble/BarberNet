@@ -46,9 +46,6 @@ export default async function SetView({
   const email = session?.user?.email;
   const isEmployee = email ? await isUserEmployee(email) : false;
 
-  const basket = cookies().get("basket")?.value;
-  const basketArr: string[] = basket ? JSON.parse(basket) : [];
-
   return (
     <main className="bg-slate-500 text-white max-h-[30vh]">
       <div className="p-1 flex w-full h-[80vh]">
@@ -63,8 +60,11 @@ export default async function SetView({
           <div>
             <p className="text-xl break-words">{salons.name}</p>
             <hr />
+            <p className="text-xl break-words">{salons.description}</p>
+            
           </div>
           <div className="pt-5 max-h-[70%] overflow-auto w-full static">
+          <hr />
             <p>Location: {salons.location}</p>
             {isEmployee && (
               <>

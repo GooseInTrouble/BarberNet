@@ -21,9 +21,6 @@ export default function ProfileButton() {
           <Link className={entryStyle} href="/profile">
             Your Profile
           </Link>
-          <Link className={entryStyle} href="/newcloth">
-            Add New Salon
-          </Link>
           <Link className={entryStyle} href="/userAppointments">
             Your Appointments
           </Link>

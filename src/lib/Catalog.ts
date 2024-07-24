@@ -1,6 +1,7 @@
 import { servicesCollection } from "@/lib/MongoConnect";
 import { WithId, Filter, Document } from "mongodb";
 import Services, { ServiceCategory } from "@/types/Services";
+import { ObjectId } from "mongodb";
 
 export function GetFilterProps(filterName: keyof Services) {
   return servicesCollection.distinct(filterName);
@@ -10,6 +11,9 @@ export function GetAllFilterProps(filterNames: (keyof Services)[]) {
   return Promise.all(
     filterNames.map((filterName) => GetFilterProps(filterName))
   );
+}
+export function GetServiceItem(id: ObjectId) {
+  return servicesCollection.findOne({ _id: id }) as Promise<WithId<Services>>;
 }
 
 export function GetCatalogFiltered(searchParams: Partial<Services>) {

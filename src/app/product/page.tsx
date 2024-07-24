@@ -39,9 +39,6 @@ export default async function Product({
   const userEmail = session?.user?.email;
   const isAdmin = userEmail === "artem.arabadzhy@nure.ua";
 
-  const basket = cookies().get("basket")?.value;
-  const basketArr: string[] = basket ? JSON.parse(basket) : [];
-
   return (
     <main className="bg-slate-500 text-white max-h-[30vh]">
       <div className="p-1 flex w-full h-[80vh]">
@@ -56,6 +53,7 @@ export default async function Product({
           <div>
             <p className="text-xl break-words">{services.name}</p>
             <hr />
+            <p className="text-xl break-words">{services.description}</p>
           </div>
           <div className="pt-5 max-h-[70%] overflow-auto w-full static">
             {isAdmin ? (
@@ -77,7 +75,7 @@ export default async function Product({
               <>
                 <table className="bg-[#596273] w-full min-w-[50%] table-auto">
                   <tbody>
-                    <tr>
+                  <tr>
                       <td className="border border-slate-400 px-1.5 py-1">
                         Description
                       </td>
@@ -90,7 +88,7 @@ export default async function Product({
                         Type
                       </td>
                       <td className="border border-slate-400 px-1.5 py-1">
-                        {services.ServiceCategory.join(", ")}
+                        {services.ServiceCategory}
                       </td>
                     </tr>
                     <tr>

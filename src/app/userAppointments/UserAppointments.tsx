@@ -41,8 +41,8 @@ const UserAppointments = ({ userId }: { userId: string }) => {
         <ul>
           {appointments.map((appointment) => (
             <li key={appointment._id} className="mb-4 p-4 border rounded-md">
-              <p><strong>Service ID:</strong> {appointment.serviceId}</p>
-              <p><strong>Worker ID:</strong> {appointment.workerId}</p>
+              <p><strong>Service:</strong> {appointment.serviceId}</p>
+              <p><strong>Worker:</strong> {appointment.workerId}</p>
               <p><strong>Date:</strong> {new Date(appointment.date).toLocaleString()}</p>
               <p><strong>Price:</strong> ${appointment.price}</p>
             </li>

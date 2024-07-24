@@ -7,7 +7,7 @@ interface AppointmentFormProps {
 interface AppointmentData {
     serviceId: string;
     workerId: string;
-    date: Date; // Змінено тип даних на Date
+    date: Date;
     userId: string;
     price: number;
   }
@@ -17,7 +17,7 @@ const AppointmentForm = ({ onSubmit }: AppointmentFormProps) => {
   const [serviceId, setServiceId] = useState<string>('');
   const [workerId, setWorkerId] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [price, setPrice] = useState<number>(50); // Placeholder price, replace with actual logic
+  const [price, setPrice] = useState<number>(250);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const AppointmentForm = ({ onSubmit }: AppointmentFormProps) => {
     const formData: AppointmentData = {
       serviceId,
       workerId,
-      date: new Date(date), // Перетворення рядка на об'єкт Date
+      date: new Date(date),
       userId: 'user123',
       price,
     };
@@ -46,7 +46,7 @@ const AppointmentForm = ({ onSubmit }: AppointmentFormProps) => {
         setServiceId('');
         setWorkerId('');
         setDate('');
-        setPrice(50); // Скидання ціни до плейсхолдерного значення після відправки
+        setPrice(250);
       } else {
         console.error('Failed to create appointment:', response.statusText);
       }
@@ -95,7 +95,7 @@ const AppointmentForm = ({ onSubmit }: AppointmentFormProps) => {
             Date:
           </label>
           <input
-            type="datetime-local" // Use datetime-local for date and time selection
+            type="datetime-local"
             id="date"
             name="date"
             value={date}
