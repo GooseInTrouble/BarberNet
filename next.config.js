@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -29,12 +30,12 @@ const nextConfig = {
     ];
   },
   serverRuntimeConfig: {
-    externalHost: '0.0.0.0', // Прослуховувати всі зовнішні адреси
-    externalPort: 3000, // Порт, на якому працює сервер
+    externalHost: '0.0.0.0', // Listen on all external addresses
+    externalPort: 3000, // Port on which the server runs
   },
-};
-module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
-}
+};
+
+module.exports = nextConfig;

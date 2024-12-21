@@ -7,11 +7,16 @@ export default function Home() {
       <div id="carouselExampleCaptions" className="relative">
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           <div className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <Image
-              src="/salon5.jpg"
-              className="block w-full"
-              alt="..."
-            />
+          <Image
+  src="/salon5.jpg"
+  alt="placeholderjpg"
+  className="block group-hover:blur-sm transition duration-300"
+  width={800}
+  height={0} // You can set height to 0; it will be recalculated automatically.
+  layout="responsive"
+  priority
+/>
+
             <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
               <h5 className="text-xl">First slide label</h5>
               <p>
