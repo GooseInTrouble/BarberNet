@@ -72,7 +72,7 @@ const runQueries = async () => {
     console.log("Connected to MongoDB");
 
     // Example parameters for test queries
-    const salonId = "67675ba901158c7702dae260";  // Replace with actual salon ID
+    const salonId = "67675ba901158c7702dae260"; 
     const serviceId = "6767544baacdfd72cc81ea57";
 
     // Arrays to store execution times
